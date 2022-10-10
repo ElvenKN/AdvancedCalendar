@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const url = require('url');
 const querystring = require('querystring');
 const dayjs = require('dayjs');
+const path = require('path');
 
 const MoY = [
   'January',
@@ -30,7 +31,7 @@ const DoW = [
 ];
 
 const app = express();
-const port = 8080; // default port to listen
+app.set('view engine', 'pug');
 
 // define a route handler for the default home page
 app.get("/", (req, res) => {
@@ -42,11 +43,13 @@ app.get("/bye", (req, res) => {
 });
 
 app.get('/month', async function(req, res) {
-  let y = req.query.y;
-  let m = req.query.m;
-
-  let grid = createMonthGrid(y, m);
-  res.send(grid);
+  const y = req.query.y;
+  const m = req.query.m;
+  const grid = createMonthGrid(y, m);
+  res.render('month', {
+    title: 'Month View',
+    htmlGrid: grid,
+  });
 });
 
 app.get('/day', async function(req, res) {
@@ -145,8 +148,11 @@ function createMonthGrid(y, m) {
   return grid;
 }
 
+const public = path.join(__dirname, '../public');
+app.use(express.static(public));
 
 // start the Express server
+const port = 8080; // default port to listen
 app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
+  console.log(`server started at http://localhost:${port} -- public content in [${public}]`);
 });
