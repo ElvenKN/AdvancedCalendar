@@ -1,7 +1,7 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const url = require('url');
-const querystring = require('querystring');
+// const bodyParser = require('body-parser');
+// const url = require('url');
+// const querystring = require('querystring');
 const dayjs = require('dayjs');
 const path = require('path');
 
@@ -31,7 +31,6 @@ const DoW = [
 ];
 
 const app = express();
-app.set('view engine', 'pug');
 
 // define a route handler for the default home page
 app.get("/", (req, res) => {
@@ -148,11 +147,16 @@ function createMonthGrid(y, m) {
   return grid;
 }
 
+// set directory with public content
 const public = path.join(__dirname, '../public');
 app.use(express.static(public));
+
+// set templating engine to pug
+app.set('view engine', 'pug');
 
 // start the Express server
 const port = 8080; // default port to listen
 app.listen(port, () => {
-  console.log(`server started at http://localhost:${port} -- public content in [${public}]`);
+  console.log(`server started at http://localhost:${port}`);
+  // console.log(`public content in [${public}]`);
 });

@@ -1,4 +1,6 @@
 extends default
 
 block content
-  #{htmlGrid}
+  // we use !{} because htmlGrid contains HTML which must not be quoted
+  // otherwise we would use ${}
+  p !{htmlGrid}
