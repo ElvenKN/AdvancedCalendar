@@ -90,6 +90,55 @@ app.get('/month', async function(req, res) {
   res.send(grid);
 });
 
+app.get('/day', async function(req, res) {
+  let y = req.query.y;
+  let m = req.query.m;
+  let d = req.query.d;
+
+  let grid = `
+<p>Monday 10 October 2022</p>
+<table border=1>
+ <tr>
+  <td>8:00</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>9:00</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>10:00</td>
+  <td>History lesson</td>
+ </tr>
+ <tr>
+  <td>11:00</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>12:00</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>13:00</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>14:00</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>15:00</td>
+  <td></td>
+ </tr>
+ <tr>
+  <td>16:00</td>
+  <td></td>
+ </tr>
+</table>
+`;
+  res.send(grid);
+});
+
 
 // start the Express server
 app.listen(port, () => {
