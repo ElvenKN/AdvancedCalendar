@@ -5,6 +5,8 @@ const express = require('express');
 const dayjs = require('dayjs');
 const path = require('path');
 
+const DEBUG = require('debug')('index')
+
 const MoY = [
   'January',
   'February',
@@ -32,18 +34,18 @@ const DoW = [
 
 const app = express();
 
-// define a route handler for the default home page
-app.get("/", (req, res) => {
-  res.send("Hello nico!");
-});
+app.get('/year', async function(req, res) {
+  const y = req.query.y;
+  DEBUG('[%s]: y=%d', '/year', y);
 
-app.get("/bye", (req, res) => {
-  res.send("Bye nico!");
+  res.send('NOT IMPLEMENTED');
 });
 
 app.get('/month', async function(req, res) {
   const y = req.query.y;
   const m = req.query.m;
+  DEBUG('[%s]: y=%d, m=%d', '/month', y, m);
+
   const grid = createMonthGrid(y, m);
   res.render('month', {
     title: 'Month View',
@@ -55,6 +57,7 @@ app.get('/day', async function(req, res) {
   let y = req.query.y;
   let m = req.query.m;
   let d = req.query.d;
+  DEBUG('[%s]: y=%d, m=%d, d=%d', '/day', y, m, d);
 
   let grid = `
 <p>Monday 10 October 2022</p>
@@ -157,6 +160,6 @@ app.set('view engine', 'pug');
 // start the Express server
 const port = 8080; // default port to listen
 app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
-  // console.log(`public content in [${public}]`);
+  DEBUG('server started at http://%s:%d', 'localhost', port);
+  DEBUG('public content served from [%s]', public);
 });
