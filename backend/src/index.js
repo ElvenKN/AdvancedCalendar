@@ -106,11 +106,11 @@ function createMonthGrid(y, m) {
   const eom = date.endOf('month').date()
 
   let grid = '';
-  let current = 2 - dow;
+  let current = 2 - (dow == 0 ? 7 : dow);
   let position = 0;
   grid += '<table border="1">'
 
-  grid += `<tr><th colspan="7">${MoY[m - 1]}</th></tr>`
+  grid += `<tr><th colspan="7">${MoY[m - 1]} ${y}</th></tr>`
 
   grid += '<tr>'
   for (let d = 0; d < 7; ++d) {
