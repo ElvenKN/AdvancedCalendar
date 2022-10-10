@@ -2,7 +2,32 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const url = require('url');
 const querystring = require('querystring');
-const dayjs = require ('dayjs');
+const dayjs = require('dayjs');
+
+const MoY = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const DoW = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
 
 const app = express();
 const port = 8080; // default port to listen
@@ -74,17 +99,48 @@ app.get('/day', async function(req, res) {
 });
 
 function createMonthGrid(y, m) {
-  console.log(`y: [${y}], m: [${m}]`)
   const date = dayjs(`${y}-${m}-01`, 'YYYY-MM-DD');
-  console.log(date)
   const dow = date.day(); // 0: Sun, 1: Mon, ..., 6: Sat
   const eom = date.endOf('month').date()
-  console.log(`dow: [${dow}], eom: [${eom}]`)
 
   let grid = '';
-  for (let d = 1 ; d <= eom ; d += 1) {
-    grid = grid + d + ',';
+  let current = 2 - dow;
+  let position = 0;
+  grid += '<table border="1">'
+
+  grid += `<tr><th colspan="7">${MoY[m - 1]}</th></tr>`
+
+  grid += '<tr>'
+  for (let d = 0; d < 7; ++d) {
+    grid += `<th>${DoW[d].slice(0, 3)}</th>`
   }
+  grid += '</tr>'
+
+  grid += '<tr>'
+  while (true) {
+    grid += '<td style="text-align:center">'
+    if (current < 1) {
+      grid += '<';
+    } else if (current > eom) {
+      grid += '>';
+    } else {
+      grid += current;
+    }
+    grid += '</td>'
+
+    ++current;
+    ++position;
+    if (position >= 7) {
+      if (current > eom) {
+        break;
+      }
+      grid += '</tr>';
+      grid += '<tr>';
+      position = 0;
+    }
+  }
+  grid += '</tr>'
+  grid += '</table>'
 
   return grid;
 }
