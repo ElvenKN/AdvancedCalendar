@@ -77,13 +77,34 @@ function createMonthGrid(y, m) {
   console.log(`y: [${y}], m: [${m}]`)
   const date = dayjs(`${y}-${m}-01`, 'YYYY-MM-DD');
   console.log(date)
-  const dow = date.day(); // 0: Sun, 1: Mon, ..., 6: Sat
+  let dow = date.day(); // 0: Sun, 1: Mon, ..., 6: Sat
+  if (dow == 0) {
+    dow = 7 // 7: Sun, 1: Mon, ..., 6: Sat
+  }
   const eom = date.endOf('month').date()
   console.log(`dow: [${dow}], eom: [${eom}]`)
 
   let grid = '';
-  for (let d = 1 ; d <= eom ; d += 1) {
-    grid = grid + d + ',';
+  let pos_week = 0;
+  let pos_month = 2 - dow;
+  while (true) {
+    if (pos_month < 1) {
+      grid += '<';
+    } else if (pos_month > eom) {
+      grid += '>';
+    } else {
+      grid += pos_month;
+    }
+    grid += ',';
+    ++pos_week;
+    ++pos_month;
+    if (pos_week == 7) {
+      grid += '<br/>';
+      pos_week = 0;
+      if (pos_month > eom) {
+        break;
+      }
+    }
   }
 
   return grid;
