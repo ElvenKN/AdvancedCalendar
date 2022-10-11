@@ -83,30 +83,67 @@ function createMonthGrid(y, m) {
   }
   const eom = date.endOf('month').date()
   console.log(`dow: [${dow}], eom: [${eom}]`)
-
+  const DayNames = [
+    "",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ]
+  const MonthNames = [
+    "",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ]
   let grid = '';
   let pos_week = 0;
   let pos_month = 2 - dow;
+  grid += "<table border=3>"
+  grid += "<tr>"
+  grid += "<td colspan=7>"
+  grid += `${MonthNames[m]}, ${y}`;
+  grid += "</tr>"
+  grid += "<tr>"
+  for (let d = 1; d <= 7; ++d) {
+    grid += "<td>"
+    grid += DayNames[d];
+    grid += "</td>"
+  }
+  grid += "</tr>"
+  grid += "<tr>"
   while (true) {
+    grid += "<td>"
     if (pos_month < 1) {
-      grid += '<';
     } else if (pos_month > eom) {
-      grid += '>';
     } else {
       grid += pos_month;
     }
-    grid += ',';
+    grid += "</td>"
     ++pos_week;
     ++pos_month;
     if (pos_week == 7) {
-      grid += '<br/>';
+      grid += '</tr>';
       pos_week = 0;
       if (pos_month > eom) {
         break;
       }
+      grid += "<tr>"
     }
   }
-
+  grid += "</table>"
   return grid;
 }
 
