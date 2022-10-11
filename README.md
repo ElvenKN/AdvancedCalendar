@@ -1,4 +1,9 @@
-## My Advanced Calendar project
+## My Advanced Calendar Project
 
-Yay!
-Joined!
+# Introduction
+
+# TODO
+* aesthetics
+* views for day and year
+* database in the backend with data to show per day / month / year
+
