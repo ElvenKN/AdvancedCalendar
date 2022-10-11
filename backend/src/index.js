@@ -1,33 +1,39 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const url = require('url');
-const querystring = require('querystring');
-const dayjs = require ('dayjs');
+const dayjs = require('dayjs');
+
+const DEBUG = require('debug')('index')
 
 const app = express();
 const port = 8080; // default port to listen
 
-// define a route handler for the default home page
+// default home page: show current month
 app.get("/", (req, res) => {
-  res.send("Hello nico!");
+  const today = dayjs()
+  const y = today.year();
+  const m = today.month() + 1;
+  showMonth(res, y, m);
 });
 
-app.get("/bye", (req, res) => {
-  res.send("Bye nico!");
-});
-
+// show desired month
 app.get('/month', async function(req, res) {
-  let y = req.query.y;
-  let m = req.query.m;
+  const y = req.query.y;
+  const m = req.query.m;
+  showMonth(res, y, m);
+});
+
+function showMonth(res, y, m) {
+  DEBUG('/month: y=%d, m=%d', y, m);
 
   let grid = createMonthGrid(y, m);
   res.send(grid);
-});
+}
 
+// show desired day
 app.get('/day', async function(req, res) {
   let y = req.query.y;
   let m = req.query.m;
   let d = req.query.d;
+  DEBUG('/day: y=%d, m=%d, d=%d', y, m, d);
 
   let grid = `
 <p>Monday 10 October 2022</p>
@@ -74,15 +80,14 @@ app.get('/day', async function(req, res) {
 });
 
 function createMonthGrid(y, m) {
-  console.log(`y: [${y}], m: [${m}]`)
   const date = dayjs(`${y}-${m}-01`, 'YYYY-MM-DD');
   const today = dayjs()
   let dow = date.day(); // 0: Sun, 1: Mon, ..., 6: Sat
   if (dow == 0) {
     dow = 7 // 7: Sun, 1: Mon, ..., 6: Sat
   }
+  DEBUG('dow=%d', dow);
   const eom = date.endOf('month').date()
-  console.log(`dow: [${dow}], eom: [${eom}]`)
   const DayNames = [
     "",
     "Monday",
@@ -167,5 +172,5 @@ function createMonthGrid(y, m) {
 
 // start the Express server
 app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
+  DEBUG('server started at http://localhost:%d', port);
 });
