@@ -76,7 +76,7 @@ app.get('/day', async function(req, res) {
 function createMonthGrid(y, m) {
   console.log(`y: [${y}], m: [${m}]`)
   const date = dayjs(`${y}-${m}-01`, 'YYYY-MM-DD');
-  console.log(date)
+  const today = dayjs()
   let dow = date.day(); // 0: Sun, 1: Mon, ..., 6: Sat
   if (dow == 0) {
     dow = 7 // 7: Sun, 1: Mon, ..., 6: Sat
@@ -132,7 +132,11 @@ function createMonthGrid(y, m) {
     } else if (pos_month > eom) {
     } else {
       show = true;
-      if (pos_week == 5 || pos_week == 6) {
+      const current = date.date(pos_month)
+      if (current.isSame(today, 'date')) {
+        // today
+        style += ' background-color:#EEFCBD;'
+      } else if (pos_week == 5 || pos_week == 6) {
         // Sat or Sun
         style += ' background-color:#A5F0E7A0;'
       }
