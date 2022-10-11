@@ -111,26 +111,38 @@ function createMonthGrid(y, m) {
   let grid = '';
   let pos_week = 0;
   let pos_month = 2 - dow;
-  grid += "<table border=3>"
+  grid += "<div style='width: 750px; height: 500px; position: absolute; top:0; bottom: 0; left: 0; right: 0; margin: auto;'>";
+  grid += "<table border=3 class='center' style='border-collapse:collapse; table-layout:fixed; width: 750px; font-size:300%;'>"
   grid += "<tr>"
-  grid += "<td colspan=7>"
+  grid += "<td colspan=7 style='text-align:center; font-weight: bold; text-decoration:underline;'>"
   grid += `${MonthNames[m]}, ${y}`;
   grid += "</tr>"
   grid += "<tr>"
   for (let d = 1; d <= 7; ++d) {
-    grid += "<td>"
-    grid += DayNames[d];
+    grid += "<td style='text-align:center;'>"
+    grid += DayNames[d].slice(0, 3);
     grid += "</td>"
   }
   grid += "</tr>"
   grid += "<tr>"
   while (true) {
-    grid += "<td>"
+    let show = false;
+    let style = 'text-align:center;';
     if (pos_month < 1) {
     } else if (pos_month > eom) {
     } else {
+      show = true;
+      if (pos_week == 5 || pos_week == 6) {
+        // Sat or Sun
+        style += ' background-color:#A5F0E7A0;'
+      }
+    }
+    grid += '<td>'
+    grid += `<div style='${style}'>`
+    if (show) {
       grid += pos_month;
     }
+    grid += "</div>"
     grid += "</td>"
     ++pos_week;
     ++pos_month;
@@ -144,6 +156,7 @@ function createMonthGrid(y, m) {
     }
   }
   grid += "</table>"
+  grid += "</div>";
   return grid;
 }
 
