@@ -119,8 +119,24 @@ function createMonthGrid(y, m) {
   grid += "<div style='width: 750px; height: 500px; position: absolute; top:0; bottom: 0; left: 0; right: 0; margin: auto;'>";
   grid += "<table border=3 class='center' style='border-collapse:collapse; table-layout:fixed; width: 750px; font-size:300%;'>"
   grid += "<tr>"
-  grid += "<td colspan=7 style='text-align:center; font-weight: bold; text-decoration:underline;'>"
+  let pm = m-1;
+  let py = y;
+  if (pm == 0) {
+    py -= 1
+    pm = 12
+  }
+  let nm = m+1;
+  let ny = y;
+  if (nm == 13) {
+    ny += 1
+    nm = 1
+  }
+  grid += `<td style='text-align:left; border-right:none;'><a href='/month?y=${py}&m=${pm}'>◀</a></td>`
+  grid += "<td colspan=5 style='text-align:center; border:none; font-weight: bold;'>"
   grid += `${MonthNames[m]}, ${y}`;
+  grid += "</td>"
+  grid += `<td style='text-align:right; border-left:none;'><a href='/month?y=${ny}&m=${nm}'>▶</a></td>`
+  // ⏩    ▶  ◀ ⏪
   grid += "</tr>"
   grid += "<tr>"
   for (let d = 1; d <= 7; ++d) {
