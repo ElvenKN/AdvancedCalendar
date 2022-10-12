@@ -131,11 +131,11 @@ function createMonthGrid(y, m) {
     ny += 1
     nm = 1
   }
-  grid += `<td style='text-align:left; border-right:none;'><a href='/month?y=${py}&m=${pm}'>◀</a></td>`
+  grid += `<td style='text-align:left; border-right:none;'><a style='text-decoration:none;' title='${y-1}' href='/month?y=${y-1}&m=${m}'>⏪</a><a style='text-decoration:none;' title='${MonthNames[pm]}' href='/month?y=${py}&m=${pm}'>◀</a></td>`
   grid += "<td colspan=5 style='text-align:center; border:none; font-weight: bold;'>"
   grid += `${MonthNames[m]}, ${y}`;
   grid += "</td>"
-  grid += `<td style='text-align:right; border-left:none;'><a href='/month?y=${ny}&m=${nm}'>▶</a></td>`
+  grid += `<td style='text-align:right; border-left:none;'><a style='text-decoration:none;' title='${MonthNames[nm]}' href='/month?y=${ny}&m=${nm}'>▶</a><a style='text-decoration:none;' title='${y+1}' href='/month?y=${y+1}&m=${m}'>⏩</a></td>`
   // ⏩    ▶  ◀ ⏪
   grid += "</tr>"
   grid += "<tr>"
