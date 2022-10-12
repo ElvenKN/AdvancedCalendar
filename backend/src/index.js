@@ -86,7 +86,6 @@ function createMonthGrid(y, m) {
   if (dow == 0) {
     dow = 7 // 7: Sun, 1: Mon, ..., 6: Sat
   }
-  DEBUG('dow=%d', dow);
   const eom = date.endOf('month').date()
   const DayNames = [
     "",
