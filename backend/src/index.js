@@ -158,6 +158,7 @@ function createMonthGrid(y, m) {
       style += ' background-color:#F5F5F5;'
     } else if (pos_month > eom) {
       style += ' background-color:#F5F5F5;'
+      content = pos_month - eom;
     } else {
       content = pos_month;
       const current = date.date(pos_month)
