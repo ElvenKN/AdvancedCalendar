@@ -132,13 +132,13 @@ function createMonthGrid(y, m) {
     nm = 1
   }
   grid += `<td style='text-align:left; border-right:none;'><a style='text-decoration:none; color:#FF00FB;' title='${y - 1}' href='/month?y=${y - 1}&m=${m}'>◀</a> <a style='text-decoration:none; color:#730BD9;' title='${MonthNames[pm]}' href='/month?y=${py}&m=${pm}'>◂</a></td>`
-  grid += "<td colspan=2 style='text-align:right; border:none; font-weight: bold;'>"
+  grid += "<td colspan=2 style='text-align:center; border:none; font-weight: bold;'>"
   grid += `${MonthNames[m]}`;
   grid += "</td>"
   grid += "<td style='text-align:center; border:none; font-weight: bold;'>"
-  grid += `<a style='text-decoration:none; color:#FF00FB;' title='Today' href='/month?y=${today.year()}&m=${today.month()+1}'>🎯</a>`;
+  grid += `<a style='text-decoration:none; color:#FF00FB;' title='Today' href='/month?y=${today.year()}&m=${today.month() + 1}'>🎯</a>`;
   grid += "</td>"
-  grid += "<td colspan=2 style='text-align:left; border:none; font-weight: bold;'>"
+  grid += "<td colspan=2 style='text-align:center; border:none; font-weight: bold;'>"
   grid += `${y}`;
   grid += "</td>"
   grid += `<td style='text-align:right; border-left:none;'><a style='text-decoration:none; color:#730BD9;' title='${MonthNames[nm]}' href='/month?y=${ny}&m=${nm}'>▸</a> <a style='text-decoration:none; color:#FF00FB;' title='${y + 1}' href='/month?y=${y + 1}&m=${m}'>▶</a></td>`
