@@ -156,6 +156,7 @@ function createMonthGrid(y, m) {
     let style = 'text-align:center;';
     if (pos_month < 1) {
       style += ' background-color:#F5F5F5;'
+      content = pd + pos_month;
     } else if (pos_month > eom) {
       style += ' background-color:#F5F5F5;'
       content = pos_month - eom;
