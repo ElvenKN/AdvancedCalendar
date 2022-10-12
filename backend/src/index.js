@@ -125,21 +125,21 @@ function createMonthGrid(y, m) {
   const dnext = date.add(1, 'month').startOf('month');
   let ny = dnext.year();
   let nm = dnext.month() + 1;
-  grid += `<td style='text-align:left; border-right:none;'><a style='text-decoration:none; color:#FF00FB;' title='${y - 1}' href='/month?y=${y - 1}&m=${m}'>◀</a> <a style='text-decoration:none; color:#730BD9;' title='${MonthNames[pm]}' href='/month?y=${py}&m=${pm}'>◂</a></td>`
-  grid += "<td colspan=2 style='text-align:center; border:none; font-weight: bold;'>"
+  grid += `<td style='text-align:left; border-right:none; background-color: #F5FFFA;'><a style='text-decoration:none; color:#FF00FB;' title='${y - 1}' href='/month?y=${y - 1}&m=${m}'>◀</a> <a style='text-decoration:none; color:#730BD9;' title='${MonthNames[pm]}' href='/month?y=${py}&m=${pm}'>◂</a></td>`
+  grid += "<td colspan=2 style='text-align:center; font-size:80%; border:none; font-weight: bold; background-color: #F5FFFA;'>"
   grid += `${MonthNames[m]}`;
   grid += "</td>"
-  grid += "<td style='text-align:center; border:none; font-weight: bold;'>"
+  grid += "<td style='text-align:center; border:none; font-weight: bold; background-color: #F5FFFA;'>"
   grid += `<a style='text-decoration:none; color:#FF00FB;' title='Today' href='/month?y=${today.year()}&m=${today.month() + 1}'>🎯</a>`;
   grid += "</td>"
-  grid += "<td colspan=2 style='text-align:center; border:none; font-weight: bold;'>"
+  grid += "<td colspan=2 style='text-align:center; font-size:80%; border:none; font-weight: bold; background-color: #F5FFFA;'>"
   grid += `${y}`;
   grid += "</td>"
-  grid += `<td style='text-align:right; border-left:none;'><a style='text-decoration:none; color:#730BD9;' title='${MonthNames[nm]}' href='/month?y=${ny}&m=${nm}'>▸</a> <a style='text-decoration:none; color:#FF00FB;' title='${y + 1}' href='/month?y=${y + 1}&m=${m}'>▶</a></td>`
+  grid += `<td style='text-align:right; border-left:none; background-color: #F5FFFA;'><a style='text-decoration:none; color:#730BD9;' title='${MonthNames[nm]}' href='/month?y=${ny}&m=${nm}'>▸</a> <a style='text-decoration:none; color:#FF00FB;' title='${y + 1}' href='/month?y=${y + 1}&m=${m}'>▶</a></td>`
   grid += "</tr>"
   grid += "<tr>"
   for (let d = 1; d <= 7; ++d) {
-    grid += "<td style='text-align:center;'>"
+    grid += "<td style='text-align:center; font-weight: bold; font-size:70%; background-color:#FFF5EE'>"
     grid += DayNames[d].slice(0, 3);
     grid += "</td>"
   }
