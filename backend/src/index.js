@@ -16,8 +16,8 @@ app.get("/", (req, res) => {
 
 // show desired month
 app.get('/month', async function(req, res) {
-  const y = req.query.y;
-  const m = req.query.m;
+  const y = Number(req.query.y);
+  const m = Number(req.query.m);
   showMonth(res, y, m);
 });
 
