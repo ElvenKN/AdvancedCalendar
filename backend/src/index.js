@@ -152,12 +152,14 @@ function createMonthGrid(y, m) {
   grid += "</tr>"
   grid += "<tr>"
   while (true) {
-    let show = false;
+    let content = '&nbsp;';
     let style = 'text-align:center;';
     if (pos_month < 1) {
+      style += ' background-color:#F5F5F5;'
     } else if (pos_month > eom) {
+      style += ' background-color:#F5F5F5;'
     } else {
-      show = true;
+      content = pos_month;
       const current = date.date(pos_month)
       if (current.isSame(today, 'date')) {
         // today
@@ -169,9 +171,7 @@ function createMonthGrid(y, m) {
     }
     grid += '<td>'
     grid += `<div style='${style}'>`
-    if (show) {
-      grid += pos_month;
-    }
+    grid += content;
     grid += "</div>"
     grid += "</td>"
     ++pos_week;
