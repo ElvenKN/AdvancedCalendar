@@ -155,6 +155,7 @@ function createMonthGrid(y, m) {
       style += ' background-color:#F5F5F5; color:#787878;'
       content = pos_month - eom;
     } else {
+      style += ' color:#191970;'
       content = pos_month;
       const current = date.date(pos_month)
       if (current.isSame(today, 'date')) {
