@@ -119,18 +119,13 @@ function createMonthGrid(y, m) {
   grid += "<div style='width: 750px; height: 500px; position: absolute; top:0; bottom: 0; left: 0; right: 0; margin: auto;'>";
   grid += "<table border=3 class='center' style='border-collapse:collapse; table-layout:fixed; width: 750px; font-size:300%;'>"
   grid += "<tr>"
-  let pm = m - 1;
-  let py = y;
-  if (pm == 0) {
-    py -= 1
-    pm = 12
-  }
-  let nm = m + 1;
-  let ny = y;
-  if (nm == 13) {
-    ny += 1
-    nm = 1
-  }
+  const dprev = date.subtract(1, 'month').endOf('month');
+  let py = dprev.year();
+  let pm = dprev.month() + 1;
+  let pd = dprev.date();
+  const dnext = date.add(1, 'month').startOf('month');
+  let ny = dnext.year();
+  let nm = dnext.month() + 1;
   grid += `<td style='text-align:left; border-right:none;'><a style='text-decoration:none; color:#FF00FB;' title='${y - 1}' href='/month?y=${y - 1}&m=${m}'>◀</a> <a style='text-decoration:none; color:#730BD9;' title='${MonthNames[pm]}' href='/month?y=${py}&m=${pm}'>◂</a></td>`
   grid += "<td colspan=2 style='text-align:center; border:none; font-weight: bold;'>"
   grid += `${MonthNames[m]}`;
