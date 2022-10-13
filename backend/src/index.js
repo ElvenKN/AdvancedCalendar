@@ -68,14 +68,15 @@ function showDay(res, y, m, d) {
   const rows = data.getHomework(1, date);
   let grid = '';
   grid += "<div>";
-  grid += "<td style='text-align:center; font-size:80%; border:none; font-weight: bold; background-color: #F5FFFA;'>"
+  grid += "<table border=3 class='center' style='border-collapse:collapse; width: 750; font-size:200%;'>"
+  grid += "<tr>";
+  grid += "<td colspan=3 style='text-align:center; font-size:110%; border:none; font-weight: bold; background-color: #F5FFFA;'>"
   grid += `${d} ${MonthNames[m]}, ${y}`;
-    // ask how to put this in table
   grid += "</td>"
-  grid += "<table border=1>";
+  grid += "</tr>";
   for (const row of rows) {
     grid += "<tr>";
-    grid += `<td>${row.time}</td>`;
+    grid += `<td style='text-align:right;'>${row.time}</td>`;
     grid += `<td>${row.subject}</td>`;
     grid += `<td>${row.description}</td>`;
     grid += "</tr>";
