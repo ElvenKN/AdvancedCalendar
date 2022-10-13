@@ -1,5 +1,6 @@
 const express = require('express');
 const dayjs = require('dayjs');
+const data = require('./data.js');
 
 const DEBUG = require('debug')('index')
 
@@ -55,12 +56,32 @@ app.get('/month', async function(req, res) {
 
 // show desired day
 app.get('/day', async function(req, res) {
-  let y = req.query.y;
-  let m = req.query.m;
-  let d = req.query.d;
+  const y = Number(req.query.y);
+  const m = Number(req.query.m);
+  const d = Number(req.query.d);
   DEBUG('/day: y=%d, m=%d, d=%d', y, m, d);
-  res.send('NOT IMPLEMENTED');
+  showDay(res, y, m, d)
 });
+
+function showDay(res, y, m, d) {
+  const date = dayjs(`${y}-${m}-${d}`, 'YYYY-MM-DD');
+  const rows = data.getHomework(1, date);
+  let grid = '';
+  grid += "<div>";
+  grid += "<table border=1>";
+  for (const row of rows) {
+    grid += "<tr>";
+    grid += `<td>${row.date}</td>`;
+    grid += `<td>${row.time}</td>`;
+    grid += `<td>${row.user}</td>`;
+    grid += `<td>${row.subject}</td>`;
+    grid += `<td>${row.description}</td>`;
+    grid += "</tr>";
+  }
+  grid += "</table>";
+  grid += "</div>";
+  res.send(grid);
+}
 
 function showMonth(res, y, m) {
   let grid = '';
